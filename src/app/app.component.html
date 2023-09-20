@@ -1,0 +1,34 @@
+
+
+
+<mat-drawer-container class="example-container mat-typography">
+	<mat-drawer #drawer mode="side" disableClose="true" opened="true">
+		<mat-nav-list>
+
+      <mat-list-item  routerLink="/User"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+				<mat-icon mat-list-icon>group_add</mat-icon>
+				<h4  class="sidebar-heading">Add User</h4>
+			</mat-list-item>
+			<mat-list-item>
+				<mat-icon mat-list-icon>person</mat-icon>
+				<h4  class="sidebar-heading">Person</h4>
+			</mat-list-item>
+			<mat-list-item>
+				<mat-icon mat-list-icon>assignment</mat-icon>
+			<span><h4  class="sidebar-heading">Assignment</h4></span>	
+			</mat-list-item>
+			<mat-list-item>
+				<mat-icon mat-list-icon>domain</mat-icon>
+				<h4  class="sidebar-heading">Domain</h4>
+			</mat-list-item>
+			<mat-list-item>
+				<mat-icon mat-list-icon>folder_shared</mat-icon>
+				<h4  class="sidebar-heading">Folder shared</h4>
+			</mat-list-item>
+		</mat-nav-list>
+	</mat-drawer>
+
+	<div class="example-sidenav-content">
+	<router-outlet></router-outlet>
+	</div>
+</mat-drawer-container>
