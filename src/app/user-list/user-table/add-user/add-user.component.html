@@ -1,95 +1,135 @@
-<h2 mat-dialog-title>Add User</h2>
+<h2 mat-dialog-title *ngIf="valuse.State ==='add'">Add User</h2>
+<h2 mat-dialog-title *ngIf="valuse.State ==='view' ">View User</h2>
+<h2 mat-dialog-title *ngIf="valuse.State ==='edit' ">Edit User</h2>
 <mat-dialog-content class="mat-typography">
 
-    <mat-card>
-        <mat-card-content>
-
-            <div class="section">
+<form [formGroup]="addUser">
 
 
+    <div class="section">
+
+        <div class="_hjdjsd">
 
 
-                <div class="content-section">
+            <div class="_firle">
 
+                <mat-form-field appearance="outline">
+                    <mat-label>Enter Name</mat-label>
+                    <input matInput placeholder="Enter Name"  formControlName="fname" >
+                    <mat-icon matSuffix   [ngClass]="{'errorClass' : submited && hasError?.['fname']?.errors?.['required'], 'validsta':hasError?.['fname']?.valid}" >sentiment_very_satisfied</mat-icon>
 
-
-
-
-
-                    <mat-form-field appearance="outline">
-                        <mat-label>Enter Name</mat-label>
-                        <input matInput placeholder="Enter Name">
-                        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-
-                    </mat-form-field>
-                </div>
-                <div class="content-section">
-
-
-
-                    <mat-form-field appearance="outline">
-                        <mat-label>Enter LastName</mat-label>
-                        <input matInput placeholder="Enter LastName">
-                        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-
-                    </mat-form-field>
-                </div>
-                <div class="content-section">
-
-
-
-                    <mat-form-field appearance="outline">
-                        <mat-label>Enter Email</mat-label>
-                        <input matInput placeholder="Enter Email">
-                        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-
-                    </mat-form-field>
-                </div>
-                <div class="content-section">
-
-
-
-                    <mat-form-field appearance="outline">
-                        <mat-label>Enter Age</mat-label>
-                        <input matInput placeholder="Enter Age">
-                        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-
-                    </mat-form-field>
-                </div>
-                <div class="content-section">
-
-
-
-                    <mat-form-field appearance="outline">
-                        <mat-label>Enter Address</mat-label>
-                        <input matInput placeholder="Enter Address">
-                        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-
-                    </mat-form-field>
-
-                    <mat-form-field appearance="outline">
-                        <mat-label>Enter City</mat-label>
-                        <input matInput placeholder="Enter City">
-                        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-
-                    </mat-form-field>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Enter City</mat-label>
-                        <input matInput placeholder="Enter City">
-                        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-
-                    </mat-form-field>
-                
-                </div>
-
+                </mat-form-field>
             </div>
+            <div class="_firle">
 
 
-        </mat-card-content>
-    </mat-card>
 
+                <mat-form-field appearance="outline">
+                    <mat-label>Enter LastName</mat-label>
+                    <input matInput placeholder="Enter LastName" formControlName="lname">
+                    <mat-icon matSuffix  [ngClass]="{'errorClass' : submited && hasError?.['lname']?.errors?.['required'], 'validsta':hasError?.['lname']?.valid}">sentiment_very_satisfied</mat-icon>
+
+                </mat-form-field>
+            </div>
+            <div class="_firle">
+
+
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Enter Email</mat-label>
+                    <input matInput placeholder="Enter Email" formControlName="email">
+                    <mat-icon matSuffix [ngClass]="{'errorClass' : submited && hasError?.['email']?.errors?.['required'], 'validsta':hasError?.['email']?.valid}">sentiment_very_satisfied</mat-icon>
+
+                </mat-form-field>
+            </div>
+            <div class="_firle">
+
+
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Enter Age</mat-label>
+                    <input matInput placeholder="Enter Age"  formControlName="age">
+                    
+                    <mat-icon matSuffix [ngClass]="{'errorClass' : submited && hasError?.['age']?.errors?.['required'],'validsta':hasError?.['age']?.valid}">sentiment_very_satisfied</mat-icon>
+                </mat-form-field>
+            </div>
+        </div>
+
+
+
+        <div class="_hjdjsd">
+
+
+            <div class="_firle">
+
+                <mat-form-field appearance="outline" style="width: 15.4rem;">
+                    <mat-label>Select City</mat-label>
+                    <mat-select placeholder="Select City"  formControlName="city">
+                        <mat-option value="Nagpur">Nagpur</mat-option>
+                        <mat-option value="Mumbai">Mumbai</mat-option>
+                        <mat-option value="Delhi">Delhi</mat-option>
+                        <mat-option value="Kolkatta">Kolkatta</mat-option>
+
+                    </mat-select>
+                    <mat-icon matSuffix [ngClass]="{'errorClass' : submited && hasError?.['city']?.errors?.['required'],'validsta':hasError?.['city']?.valid}">sentiment_very_satisfied</mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="_firle">
+
+
+
+                <mat-form-field appearance="outline" style="width: 15.4rem;">
+                    <mat-label>Select State</mat-label>
+                    <mat-select placeholder="Select State"  formControlName="state">
+                        <mat-option value="1">Bangal</mat-option>
+                        <mat-option value="2">Maharastra</mat-option>
+                        <mat-option value="3">UT</mat-option>
+                    </mat-select>
+                    <mat-icon matSuffix [ngClass]="{'errorClass' : submited && hasError?.['state']?.errors?.['required'],'validsta':hasError?.['dob']?.valid}">sentiment_very_satisfied</mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="_firle">
+
+
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Date of Birth</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="Date of Birth"  formControlName="dob">
+
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-icon matPrefix [ngClass]="{'errorClass' : submited && hasError?.['dob']?.errors?.['required'] , 'validsta':hasError?.['dob']?.valid}">sentiment_very_satisfied</mat-icon>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="_firle">
+
+
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Select Gender</mat-label>
+                    <mat-select placeholder="Select Gender"formControlName="gender" >
+                        <mat-option value="Male">Male</mat-option>
+                        <mat-option value="Female">Female</mat-option>
+                        <mat-option value="Other">Other</mat-option>
+                    </mat-select>
+                    <mat-icon matSuffix [ngClass]="{'errorClass' : submited && hasError?.['gender']?.errors?.['required'], 'validsta':hasError?.['gender']?.valid}"> sentiment_very_satisfied</mat-icon>
+
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+
+
+</form>
+
+
+  
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+    <button mat-button  color="primary" *ngIf="valuse.State ==='add'"
+        cdkFocusInitial   (click)="addNew()">Save</button>
+
+    <button mat-button [mat-dialog-close]="true" color="primary" *ngIf="valuse.State ==='edit' " cdkFocusInitial>Update
+    </button>
 </mat-dialog-actions>

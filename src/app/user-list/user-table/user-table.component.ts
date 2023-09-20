@@ -80,11 +80,35 @@ ngAfterViewInit(): void {
 
 
 
-openDialog(){
-const Model= this.matdialog.open(AddUserComponent);
+openDialog(add:string){
+const Model= this.matdialog.open(AddUserComponent,{
+  maxWidth:"133vw",
+  data:{State:add}
+});
 Model.afterClosed().subscribe(result=>{
   console.log(`dialog ${result}`)
 })
 
+}
+
+
+view(view:string){
+  const Model= this.matdialog.open(AddUserComponent,{
+    maxWidth:"133vw",
+    data:{State:view}
+  });
+  Model.afterClosed().subscribe(result=>{
+    console.log(`dialog ${result}`)
+  })
+   
+}
+edit(edit:string){
+  const Model= this.matdialog.open(AddUserComponent,{
+    maxWidth:"133vw",
+    data:{State:edit}
+  });
+  Model.afterClosed().subscribe(result=>{
+    console.log(`dialog ${result}`)
+  })
 }
 }
