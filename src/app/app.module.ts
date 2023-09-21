@@ -6,7 +6,9 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { MatIconModule } from '@angular/material/icon';
-
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { AddUserComponent } from './user-list/user-table/add-user/add-user.component';
 @NgModule({
   declarations: [
     AppComponent
@@ -15,9 +17,11 @@ import { MatIconModule } from '@angular/material/icon';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-
+    HttpClientModule,
     AngularMaterialModule,
-    MatIconModule
+    MatIconModule,
+    ToastrModule.forRoot(),
+    AddUserComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
