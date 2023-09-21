@@ -81,9 +81,9 @@
                 <mat-form-field appearance="outline" style="width: 15.4rem;">
                     <mat-label>Select State</mat-label>
                     <mat-select placeholder="Select State"  formControlName="state">
-                        <mat-option value="1">Bangal</mat-option>
-                        <mat-option value="2">Maharastra</mat-option>
-                        <mat-option value="3">UT</mat-option>
+                        <mat-option value="Bangal">Bangal</mat-option>
+                        <mat-option value="Maharastra">Maharastra</mat-option>
+                        <mat-option value="UT">UT</mat-option>
                     </mat-select>
                     <mat-icon matSuffix [ngClass]="{'errorClass' : submited && hasError?.['state']?.errors?.['required'],'validsta':hasError?.['dob']?.valid}">sentiment_very_satisfied</mat-icon>
                 </mat-form-field>
