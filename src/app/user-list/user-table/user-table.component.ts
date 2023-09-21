@@ -4,56 +4,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { AddUserComponent } from './add-user/add-user.component';
+import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../user.service';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
 
 
 @Component({
@@ -62,15 +16,20 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./user-table.component.scss']
 })
 export class UserTableComponent implements AfterViewInit,OnInit{
-  displayedColumns: string[] = ['First Name', 'Last Name', 'Email', 'Age', "Address","City", "Action"];
-  dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
- constructor(private matdialog:MatDialog){
+   ELEMENT_DATA:any=[]
+  displayedColumns: string[] = ['First Name', 'Last Name', 'Email', 'Age', "Address","City","State" ,"DOB","Gender","Action"];
+  dataSource = new MatTableDataSource<any>(this.ELEMENT_DATA);
+ constructor(private matdialog:MatDialog, private toastr: ToastrService,private _ser:UserService){
 
  }
 
 @ViewChild(MatPaginator) paginator!:MatPaginator
 
 ngOnInit(): void {
+   this._ser.getUserList().subscribe((result:any)=>{
+ 
+ this.dataSource= result.data
+   })
   
 }
 
@@ -86,29 +45,56 @@ const Model= this.matdialog.open(AddUserComponent,{
   data:{State:add}
 });
 Model.afterClosed().subscribe(result=>{
-  console.log(`dialog ${result}`)
+ 
+  if(result ==true){
+    this.ngOnInit()
+  }
 })
 
 }
 
 
-view(view:string){
+view(view:string, element:any){
+
   const Model= this.matdialog.open(AddUserComponent,{
     maxWidth:"133vw",
-    data:{State:view}
+    data:{State:view, data:element}
   });
   Model.afterClosed().subscribe(result=>{
-    console.log(`dialog ${result}`)
+   
   })
    
 }
-edit(edit:string){
+edit(edit:string, element:any){
   const Model= this.matdialog.open(AddUserComponent,{
     maxWidth:"133vw",
-    data:{State:edit}
+    data:{State:edit, data:element}
   });
   Model.afterClosed().subscribe(result=>{
-    console.log(`dialog ${result}`)
+
+    this._ser.dataSubject.subscribe(res=>{
+    
+      if(res == true){
+        this.ngOnInit()
+      }
+    })
   })
 }
+
+
+
+
+
+  recordDelete(id: string) {
+
+    const modal = this.matdialog.open(DeleteDialogComponent, {
+      data: id
+    });
+    modal.afterClosed().subscribe(result => {
+
+      if (result == true) {
+        this.ngOnInit()
+      }
+    })
+  }
 }

@@ -8,25 +8,26 @@
 
     <ng-container matColumnDef="First Name">
       <th mat-header-cell *matHeaderCellDef> First Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.fname}} </td>
     </ng-container>
   
     <!-- Name Column -->
     <ng-container matColumnDef="Last Name">
       <th mat-header-cell *matHeaderCellDef>Last Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.lname}} </td>
     </ng-container>
   
     <!-- Weight Column -->
     <ng-container matColumnDef="Email">
       <th mat-header-cell *matHeaderCellDef> Email </th>
-      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
     </ng-container>
   
     <!-- Symbol Column -->
     <ng-container matColumnDef="Age">
       <th mat-header-cell *matHeaderCellDef> Age </th>
-      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.age
+      }} </td>
     </ng-container>
     <ng-container matColumnDef="Address">
         <th mat-header-cell *matHeaderCellDef> Address </th>
@@ -34,15 +35,28 @@
       </ng-container>
       <ng-container matColumnDef="City">
         <th mat-header-cell *matHeaderCellDef> City </th>
-        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+      </ng-container>
+      <ng-container matColumnDef="State">
+        <th mat-header-cell *matHeaderCellDef> State </th>
+        <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+      </ng-container>
+      <ng-container matColumnDef="DOB">
+        <th mat-header-cell *matHeaderCellDef> DOB </th>
+        <td mat-cell *matCellDef="let element"> {{element.dob |date}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Gender">
+        <th mat-header-cell *matHeaderCellDef> Gender </th>
+        <td mat-cell *matCellDef="let element"> {{element.gender
+        }} </td>
       </ng-container>
       <ng-container matColumnDef="Action">
         <th mat-header-cell *matHeaderCellDef> Action </th>
         <td mat-cell *matCellDef="let element"> 
           <div aria-label="Example icon button with a home icon">
-            <mat-icon class="__maticondkds"   (click)="view('view')">visibility</mat-icon>
-            <mat-icon  class="__maticondkds"  (click)="edit('edit')">edit</mat-icon>
-            <mat-icon   class="__maticondkds">delete</mat-icon>
+            <mat-icon class="__maticondkds"   (click)="view('view', element)">visibility</mat-icon>
+            <mat-icon  class="__maticondkds"  (click)="edit('edit', element)">edit</mat-icon>
+            <mat-icon   class="__maticondkds"  (click)="recordDelete(element._id)">delete</mat-icon>
           </div>
   
         
